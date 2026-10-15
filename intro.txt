@@ -1,0 +1,458 @@
+1. What is Django?
+
+Django is a high-level, open-source Python web framework used to build web applications quickly and securely.
+
+It is written in Python and follows the MVT (Model–View–Template) architectural pattern.
+
+Examples of applications that can be built with Django:
+
+E-commerce websites
+Social media applications
+Blog applications
+Learning management systems
+Banking/business applications
+REST APIs
+Admin dashboards
+Simple definition
+
+Django is a Python web framework that provides ready-made tools and features for developing secure, scalable, and maintainable web applications.
+
+
+Features of Django :
+
+    1. Python-based
+    2. MVT Architecture
+    3. ORM
+    4.Built-In Admin Panel
+    5.URL Routing
+    6.Authentication
+    7.Security
+
+Flask - Micro
+Django - Macro
+
+
+File Structure Explain:
+
+1. __init__.py
+What is it?
+
+    __init__.py tells Python that the config folder should be treated as a Python package.
+
+config/
+└── __init__.py
+
+What do we write inside?
+    Usually, nothing.
+
+# __init__.py
+Why is it needed?
+
+    It allows Python to import modules from the folder.
+
+For example:
+
+from config import settings
+Simple definition
+    __init__.py makes a directory recognizable as a Python package.
+
+
+2. settings.py
+What is it?
+
+settings.py contains the configuration/settings of your Django project.
+
+Think of it as the control room of your Django project.
+
+It contains things like:
+
+Installed apps
+Database configuration
+Templates
+Static files
+Middleware
+Security settings
+Time zone
+Secret key
+
+Simple definition:
+    settings.py contains the configuration required to run and control the Django project.
+
+3. urls.py
+What is it?
+
+urls.py handles URL routing.
+
+It decides:
+
+"When the user visits this URL, which view should Django execute?"
+
+
+4. asgi.py
+What is it?
+
+ASGI stands for:
+
+Asynchronous Server Gateway Interface
+
+asgi.py is used when deploying Django applications with an ASGI-compatible server.
+
+It is useful for applications that need asynchronous capabilities, such as:
+
+WebSockets
+Real-time applications
+Async Django views
+Long-running connections
+
+You normally don't need to modify it when learning basic Django.
+
+Simple definition
+
+asgi.py provides an entry point for running Django with an ASGI server.
+
+
+5. wsgi.py
+What is it?
+
+WSGI stands for:
+
+Web Server Gateway Interface
+
+wsgi.py provides an entry point for running Django with a WSGI-compatible web server.
+
+It is commonly relevant when deploying traditional Django applications.
+
+You normally don't modify it while learning basic Django.
+
+Simple definition
+
+wsgi.py provides an entry point for running Django with a WSGI server.
+
+
+Models :
+--------
+
+1. What is a Model?
+    A Model is a Python class that represents a database table.
+
+Common Django Model Fields:
+---------------------------
+
+| Field           | Purpose         | Example         |
+| --------------- | --------------- | --------------- |
+| `CharField`     | Short text      | Name            |
+| `TextField`     | Long text       | Description     |
+| `IntegerField`  | Integer         | Age             |
+| `FloatField`    | Decimal number  | Rating          |
+| `DecimalField`  | Precise decimal | Price           |
+| `BooleanField`  | True/False      | Active          |
+| `EmailField`    | Email           | Email address   |
+| `DateField`     | Date            | DOB             |
+| `DateTimeField` | Date + time     | Created time    |
+| `FileField`     | File            | Document        |
+| `ImageField`    | Image           | Profile picture |
+
+
+What is Migrations:
+    A migration is Django's way of tracking and applying changes made to your models to the database schema.
+
+What is MakeMigrations:
+
+Command:
+    python manage.py makemigrations
+
+What does it do?
+    It detects changes in your models and creates migration files.
+
+What is migrate?
+
+Command:
+
+    python manage.py migrate
+
+    This applies the migration files to the database.
+
+Flow:
+
+models.py
+    ↓
+makemigrations
+    ↓
+migration file
+    ↓
+migrate
+    ↓
+Database
+
+
+makemigrations vs migrate: 
+    This is very important for interviews.
+
+| Command          | Purpose                             |
+| ---------------- | ----------------------------------- |
+| `makemigrations` | Creates migration files             |
+| `migrate`        | Applies migration files to database |
+
+============================================
+
+Middleware:
+1. What is Middleware in Django?
+
+Definition: Middleware in Django is a component that processes HTTP requests before they reach the view and processes HTTP responses before they are sent back to the browser.
+
+In simple words, middleware acts like a security checkpoint between the browser and Django views.
+
+
+Middleware Flow :
+-----------------
+      Browser
+        |
+Sends HTTP request
+        |
+Request Middleware
+        |
+Security checks, sessions, authentication
+        |
+URL → View → Model / Template
+        |
+Processes the request
+        |
+Response Middleware
+        |
+Processes the response
+        |
+Browser receives response
+
+
+Middleware can perform tasks such as:
+
+    Authentication and security checks.
+
+    Managing sessions and cookies.
+
+    Logging requests and responses.
+
+    Processing errors.
+
+    Adding or modifying response headers.
+
+
+2. Default middleware in Django:
+    Django provides built-in middleware in the MIDDLEWARE list inside settings.py.
+A standard Django project includes these middleware classes.
+
+Default middleware                  Definition
+
+SecurityMiddleware                Adds security-related protections to requests and responses.
+
+SessionMiddleware                 Enables session management for storing user-specific data across requests.
+
+CommonMiddleware                  Provides common features, such as URL normalization and handling certain URL redirects.
+
+CsrfViewMiddleware                Helps protect against Cross-Site Request Forgery (CSRF) attacks.
+
+AuthenticationMiddleware          Associates the current user with the request, using session information.
+
+MessageMiddleware                 Enables temporary messages, such as “Login successful.”
+
+XFrameOptionsMiddleware           Helps prevent other websites from embedding pages in frames, protecting against .
+
+
+======================================
+
+
+1. What is a Superuser in Django?
+
+Definition: A superuser is an account with full permissions to manage users, groups, and registered application data through Django's admin panel, subject to the project's configuration.
+
+In simple words, a superuser is the main administrator of a Django project.
+
+Why do we use a superuser?
+
+Manage student records.
+
+Add, edit, and delete database records.
+
+Manage user accounts and permissions.
+
+Access registered models through the admin panel.
+
+The Command :
+    python manage.py createsuperuser
+
+
+2. What is the Django Admin Panel?
+
+Definition: The Django Admin Panel is a built-in web interface that allows authorized 
+users to manage application data without creating a separate management page.
+
+Example: If you create a Student model, you can manage student records from the admin 
+panel after registering the model.
+
+=================================================
+
+ORM: 
+----
+ORM stands for Object-Relational Mapping.
+Definition: Django ORM allows you to interact with a database using Python classes and methods instead of writing SQL queries manually.
+In simple words, you can perform database operations using Python code.
+
+Operation                         Django ORM code
+
+Create                            Student.objects.create(name="Mani", age=23, course="Python", mark=85)
+Read all                          Student.objects.all()
+Read one                          Student.objects.get(id=1)
+Filter                            Student.objects.filter(mark__gte=80)
+Update                            Student.objects.filter(id=1).update(mark=90)
+Delete                            Student.objects.filter(id=1).delete()
+
+
+For example, this ORM query:
+----------------------------
+
+students = Student.objects.filter(mark__gte=80)
+
+is conceptually similar to this SQL query:
+
+SELECT * FROM home_student
+WHERE mark >= 80;
+
+
+What are select_related() and prefetch_related()?
+-------------------------------------------------
+
+Suppose your application has students and courses. You want to retrieve each student's details along with the related course information.
+
+Without optimization, Django might execute extra queries when you access related objects. This can lead to the N+1 query problem.
+
+select_related() reduces queries by joining related tables in SQL.
+
+prefetch_related() reduces queries by fetching related objects separately and matching them in Python.
+
+select_related() in Django:
+---------------------------
+    Definition: select_related() retrieves the main object and its related object in a single SQL query using a JOIN. It works with ForeignKey and OneToOneField relationships.
+
+
+prefetch_related() in Django :
+------------------------------
+    Definition: prefetch_related() fetches related objects using separate database queries and combines the results in Python.
+
+    It is useful for ManyToManyField and reverse ForeignKey relationships.
+
+Example 2 — Course and Students
+
+Using the models above, one course can have many students.
+
+==============================
+
+What are Signals in Django?
+
+Definition: Django Signals allow certain parts of an application to get notified when specific events occur in another part of the application.
+
+In simple words, signals automatically execute a function when a particular event happens.
+
+For example:
+
+When a user is created, automatically create a user profile.
+
+When a student record is saved, log a message.
+
+When a database record is deleted, perform a related cleanup task.
+
+
+How Django Signals Works?
+
+1. An event occurs   Example: A new student is created
+        |
+        |
+2. Django sends a signal     Example: post_save
+        |
+        |
+3. A connected receiver function runs  --> Executes the required task
+        |
+        |
+4. Automatic action     Example: Create a related profile
+
+
+
+
+
+Types of built-in Django model signals
+
+Django provides several signals for common model events.
+
+Signal                  When it executes
+
+pre_save                Before a model instance is saved
+post_save               After a model instance is saved
+pre_delete              Before a model instance is deleted
+post_delete             After a model instance is deleted
+m2m_changed             When a many-to-many relationship changes
+pre_init                Before a model instance is initialized
+post_init               After a model instance is initialized
+
+
+=========================================================================
+
+
+1.DRF : 
+-------
+Django REST Framework (DRF) is a powerful toolkit built on Django that helps us create REST APIs easily.
+
+A normal Django application often returns HTML pages. An API commonly returns data in JSON format so that a frontend, mobile app, or another service can consume it.
+
+
+            Frontend / Client
+       (React · Mobile app · Postman)
+                    |
+                    V
+ HTTP request — GET, POST, PUT, PATCH, DELETE
+
+           Django REST Framework
+ (Serializer · ViewSet · Permissions · Pagination)
+                    | ^
+                    V |
+                Django ORM
+
+                 Database
+        (SQLite · PostgreSQL · MySQL)
+
+
+
+
+2. What is Serialization?
+-------------------------
+Serialization converts complex Python objects, such as Django model instances and querysets, into data formats such as JSON that can be sent through an API.
+
+Deserialization converts incoming data into validated Python data that can be used to create or update model instances.
+
+
+3. What is a ViewSet in DRF?
+----------------------------
+
+A ViewSet groups related API actions in one class. Instead of writing separate view functions or classes for listing, creating, retrieving, updating, and deleting records, we can organize those operations together.
+
+For example, a StudentViewSet can provide all five CRUD operations.
+
+What is CRUD?
+
+CRUD stands for:
+
+C — Create: add a new student.
+
+R — Read: retrieve students.
+
+U — Update: modify a student's details.
+
+D — Delete: remove a student.
+
+
+
+
+
+
+
+
+
+
